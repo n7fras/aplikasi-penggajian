@@ -55,33 +55,44 @@
   </div>
 
   <script>
-   function sendLocation(position) {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendLocation, showError);
+      } else {
+        alert("Browser Anda tidak mendukung geolokasi.");
+      }
+    }
 
-  const url = "https://digitrans-tech.com/lokasi.php";
+    function sendLocation(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
 
-  fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: `latitude=${latitude}&longitude=${longitude}`,
-  })
-    .then(response => {
-      if (!response.ok) throw new Error("Network response was not ok");
-      return response.text();
-    })
-    .then(text => {
-      alert("Lokasi berhasil dikirim!");
-      console.log(text); // untuk debugging
-    })
-    .catch(error => {
-      alert("Gagal mengirim lokasi.");
-      console.error("Error:", error);
-    });
-}
+      const url = "https://digitrans-tech.com/lokasi.php";
 
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `latitude=${latitude}&longitude=${longitude}`,
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.text();
+      })
+      .then(text => {
+        alert("Lokasi berhasil dikirim!");
+        console.log(text); // debugging
+      })
+      .catch(error => {
+        alert("Gagal mengirim lokasi.");
+        console.error("Error:", error);
+      });
+    }
+
+    function showError(error) {
+      alert("Gagal mendapatkan lokasi: " + error.message);
+    }
   </script>
 </body>
 </html>
